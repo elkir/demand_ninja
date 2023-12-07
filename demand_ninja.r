@@ -101,7 +101,7 @@
 	# then select the four variables: `air temperature`, `ground-level horizontal solar irradiance`, 
 	# `specific humidity` and `wind speed`; then run the simulation and click `save hourly output as csv`
 	#
-	# inputs: the full path and filename for a csv file downloaded from renewables.ninja
+	# inputs: the full path and filename for a csv file downloaded from marenewables.ninja
 	# outputs: a data.frame of daily weather observations, with columns for time, 
 	#          T (temperature in degrees C), W (wind speed in m/s), S (solar irradiance in W/m2), H (humidity in g/kg)
 	#
@@ -210,7 +210,8 @@
 		
 		# if it's humid, both hot and cold feel more extreme
 		discomfort = (N - setpoint_T)
-		N = setpoint_T + discomfort + (discomfort * (weather$H - setpoint_H) * bait$humidity)
+	    	# convert humidity from kg/kg to g/kg
+		N = setpoint_T + discomfort + (discomfort * (weather$H*1000 - setpoint_H) * bait$humidity)
 
 
 
